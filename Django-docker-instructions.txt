@@ -1,0 +1,65 @@
+############ https://docs.docker.com/compose/django/     ##############
+#1. Create a folder name it as mypro
+#2. Go to mypro folder
+#3. open console, create a python virtual env and active env
+------>$ sudo apt install python3-venv
+------>$ python3 -m venv env   # env is virtual environment name.
+------>$ source env/bin/activate
+
+#4. Copy 3 files= docker-compose.yml, Dockerfile, requirements and keep those files as same as
+
+#5. Install Docker on activated virtual env
+------>$ pip install docker-compose 		#https://docs.docker.com/compose/install/#alternative-install-options
+------>$ docker-compose --version (optional ) #Checking Docker version
+
+#6. Create Django project
+------>$ sudo docker-compose run web django-admin startproject composeexample . #https://docs.docker.com/compose/django/
+------>$ sudo chown -R $USER:$USER .  # give authenticate permissions 
+
+#7. Change composeexample/settings.py
+		# settings.py
+
+ 		ALLOWED_HOSTS = ['*']
+
+		DATABASES = {
+		    'default': {
+			'ENGINE': 'django.db.backends.postgresql',
+			'NAME': 'postgres',
+			'USER': 'postgres',
+			'PASSWORD': 'postgres',
+			'HOST': 'db',
+			'PORT': 5432,
+		    }
+		}
+
+
+#8. Run Django project 
+------>$ docker-compose up
+
+#(Optional)
+a) start docker compose: $ docker-compose up -d
+
+b) stop docker compose: $ docker-compose down
+
+c) check the container executions logs: $ docker-compose logs
+
+d) check running container $ docker-compose ps
+
+e) for building again $ docker-compose up -d --build
+
+f) remove the container: $ docker system prune -a
+
+g) remove the container: $ docker-compose exec db bash   
+			 $ psql                          # https://www3.ntu.edu.sg/home/ehchua/programming/sql/PostgreSQL_GetStarted.html
+			 $ sudo -u postgres psql postgres
+
+
+
+
+
+
+
+
+
+
+
