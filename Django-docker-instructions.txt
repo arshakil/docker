@@ -57,8 +57,7 @@ g) remove the container: $ docker-compose exec db bash
 
 
 
-## 9. How To Remove Docker Images, Containers, and Volumes
-
+## 9. How To Remove Docker Images, Containers, and Volume
 ## https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
 
 
