@@ -1,0 +1,41 @@
+
+######## To learn more ## https://vuejs.org/v2/cookbook/dockerize-vuejs-app.html ###################################
+
+## 1. Create a (Dockerfile) file in folder, where json.js file is located. added Dockerfile below those lines
+
+##################################################################
+FROM node:lts-alpine
+# install simple http server for serving static content
+RUN npm install -g http-server
+
+# make the 'app' folder the current working directory
+WORKDIR /app
+
+# copy both 'package.json' and 'package-lock.json' (if available)
+COPY package*.json ./
+
+# install project dependencies
+RUN npm install
+
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY . .
+
+# build app for production with minification
+RUN npm run build
+
+EXPOSE 8080
+CMD [ "http-server", "dist" ]
+############################################
+** 2. Build docker image using CMD
+-->$ docker build .
+
+Or(Optional)-->$ docker build -t vuejs-cookbook/dockerize-vuejs-app .   # using user custom image name(vuejs-cookbook/dockerize-vuejs-app)
+
+** 3. Just run vue.js at port 8080
+-->$ docker run -p 8080:8080 ae146094f482    # where (ae146094f482) is IMAGE to check -->$  docker ps -a
+
+ Or(Optional)-->$ docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/dockerize-vuejs-app
+
+
+
+
